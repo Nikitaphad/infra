@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About - Surya Infratech</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+}
+
+/* HEADER */
+header {
+    position: sticky;
+    top: 0;
+    background: #0A3D62;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #aad4ff;
+}
+
+/* MOBILE MENU */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    color: white;
+    border: none;
+}
+
+/* HERO (PAGE HEADER) */
+.page-hero {
+    background: linear-gradient(rgba(10,61,98,0.9), rgba(10,61,98,0.9));
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.page-hero h1 {
+    font-size: 36px;
+}
+
+/* SECTION */
+section {
+    padding: 60px 5%;
+}
+
+/* CARD */
+.card {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* HEADINGS */
+h2 {
+    color: #0A3D62;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* TEXT */
+p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* FOOTER */
+footer {
+    background: #0A3D62;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        background: #0A3D62;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    header {
+        flex-wrap: wrap;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SURYA INFRATECH</div>
+
+    <button class="menu-toggle">☰</button>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<!-- PAGE TITLE -->
+<section class="page-hero">
+    <h1>About Us</h1>
+</section>
+
+<!-- ABOUT CONTENT -->
+<section>
+    <div class="card">
+
+        <p>
+        Surya Infratech Solutions Pvt. Ltd. is part of the Surya Business Group, established in 1998 by Mr. Raju Vilas Birajdar.
+        </p>
+
+        <p>
+        Under the leadership of Director Mr. Nageshwar Raju Birajdar, we focus on innovation, advanced technology, and customer satisfaction.
+        </p>
+
+        <h2>Vision</h2>
+        <p>
+        To become a leading and trusted name in construction and infrastructure.
+        </p>
+
+        <h2>Mission</h2>
+        <p>
+        Deliver high-quality projects using modern technology and ensure customer satisfaction.
+        </p>
+
+        <h2>Our USP</h2>
+        <p>
+        Complete infrastructure solutions under one roof with quality, durability, and timely delivery.
+        </p>
+
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Surya Infratech Solutions Pvt. Ltd.</p>
+</footer>
+
+<script>
+
+// MOBILE MENU
+document.querySelector(".menu-toggle").onclick = function(){
+    document.querySelector("nav").classList.toggle("active");
+};
+
+</script>
+
+</body>
+</html>

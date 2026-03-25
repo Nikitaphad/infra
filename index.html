@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Surya Infratech Solutions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+}
+
+/* HEADER */
+header {
+    position: sticky;
+    top: 0;
+    background: #0A3D62;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #aad4ff;
+}
+
+/* MOBILE MENU */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    color: white;
+    border: none;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+
+    background:
+    linear-gradient(rgba(10,61,98,0.85), rgba(10,61,98,0.9)),
+    url('images/hero.jpg') center/cover no-repeat;
+    color: white;
+}
+
+.hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+}
+
+.hero p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* SECTIONS */
+section {
+    padding: 70px 5%;
+    text-align: center;
+}
+
+/* LIGHT SECTION */
+.light {
+    background: #f0f6ff;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 1000px;
+    margin: auto;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* HEADINGS */
+h2 {
+    color: #0A3D62;
+    margin-bottom: 15px;
+}
+
+/* SERVICES */
+.services ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    list-style: none;
+    margin-top: 20px;
+}
+
+.services li {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* GALLERY */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* CTA */
+.cta {
+    background: #0A3D62;
+    color: white;
+}
+
+.cta a {
+    background: #ffffff;
+    color: #0A3D62;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-top: 15px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+    background: #0A3D62;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ANIMATION */
+section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s;
+}
+
+section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        background: #0A3D62;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    header {
+        flex-wrap: wrap;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SURYA INFRATECH</div>
+    <button class="menu-toggle">☰</button>
+    <nav>
+        <a href="#">Home</a>
+       <a href="about.html">About</a>
+        <a href="#">Services</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h1>Surya Infratech Solutions Pvt. Ltd.</h1>
+        <p>Trust | Strength | Innovation</p>
+        <p>Modern, Durable & Cost-Effective Construction Solutions</p>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="light">
+    <div class="card">
+        <h2>Who We Are</h2>
+        <p>
+        We are a trusted construction and infrastructure company delivering high-quality residential and commercial solutions.
+        Backed by Surya Business Group (since 1998), we bring experience, innovation, and reliability.
+        </p>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section>
+    <div class="card services">
+        <h2>Our Core Services</h2>
+        <ul>
+            <li>🏗️ Construction</li>
+            <li>🪟 Aluminium Work</li>
+            <li>🧱 UPVC Windows</li>
+            <li>🪞 Glass Work</li>
+            <li>🏢 ACP Sheets</li>
+            <li>🔩 Railing</li>
+        </ul>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section class="light">
+    <div class="card">
+        <h2>Our Projects</h2>
+        <div class="gallery">
+            <img src="images/p1.jpg">
+            <img src="images/p2.jpg">
+            <img src="images/p3.jpg">
+            <img src="images/p4.jpg">
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <h2>Start Your Project With Us</h2>
+    <a href="#">Get in Touch</a>
+</section>
+
+<footer>
+    <p>© 2026 Surya Infratech Solutions Pvt. Ltd.</p>
+</footer>
+
+<script>
+document.querySelector(".menu-toggle").onclick = function(){
+    document.querySelector("nav").classList.toggle("active");
+};
+
+window.addEventListener("scroll", () => {
+    document.querySelectorAll("section").forEach(sec => {
+        let top = sec.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100){
+            sec.classList.add("show");
+        }
+    });
+});
+</script>
+
+</body>
+</html>

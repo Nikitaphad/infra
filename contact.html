@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>InfraTech | Contact & Connect</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS Library (Animate on Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f8fafc 0%, #eef2f5 100%);
+            color: #1e2a3e;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* modern navbar with glass morphism */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.02);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 119, 182, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.65rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #0b3b5f, #1e6f5c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo i {
+            background: linear-gradient(145deg, #0f4c5f, #1e7e6c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: #1e6f5c;
+            font-size: 1.9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2c3e50;
+            transition: 0.25s ease;
+            font-size: 0.98rem;
+            position: relative;
+        }
+
+        .nav-links a:not(.btn-dashboard):after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2.5px;
+            background: linear-gradient(90deg, #1e6f5c, #14919b);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover:after,
+        .nav-links a.active:after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #1e6f5c;
+        }
+
+        .btn-dashboard {
+            background: linear-gradient(95deg, #1e6f5c, #14919b);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: white !important;
+            box-shadow: 0 4px 8px rgba(30, 111, 92, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-dashboard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(30, 111, 92, 0.3);
+        }
+
+        .live-clock {
+            background: rgba(30, 111, 92, 0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            font-family: monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a5f4e;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* page container */
+        .page-container {
+            max-width: 1280px;
+            margin: 2.5rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #1a3c40, #1e6f5c, #2c9b7a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            animation: fadeSlideUp 0.7s ease-out;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #4a627a;
+            margin-top: 0.8rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeSlideUp 0.7s 0.1s backwards;
+        }
+
+        /* contact grid modern */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s;
+        }
+
+        /* left side - professional info cards */
+        .contact-info {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e9f0f0;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 40px -12px rgba(30, 111, 92, 0.2);
+        }
+
+        .contact-info h3 {
+            font-size: 1.4rem;
+            margin: 1.2rem 0 0.6rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #1a4e48;
+        }
+
+        .contact-info h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .contact-info h3 i {
+            font-size: 1.6rem;
+            color: #1e6f5c;
+            background: #e0f2e9;
+            padding: 8px;
+            border-radius: 18px;
+            width: 2.4rem;
+            text-align: center;
+        }
+
+        .contact-info p {
+            color: #2c3e4e;
+            line-height: 1.5;
+            margin-left: 0.2rem;
+            font-weight: 500;
+        }
+
+        /* whatsapp button special */
+        .whatsapp-direct {
+            margin-top: 2rem;
+            background: linear-gradient(105deg, #25D36610, #128C7E10);
+            border-radius: 1.2rem;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #25D36630;
+            transition: 0.25s;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: #25D366;
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            color: white;
+            font-size: 1rem;
+            transition: 0.2s;
+            box-shadow: 0 6px 14px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.6rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.03);
+            background: #20b859;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* form styling */
+        .contact-form {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 2rem 2rem;
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+
+        .contact-form:hover {
+            transform: translateY(-4px);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 1.2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            background: #fefefe;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #1e6f5c;
+            box-shadow: 0 0 0 4px rgba(30, 111, 92, 0.2);
+        }
+
+        .cta-button {
+            background: linear-gradient(95deg, #1e6f5c, #14919b);
+            border: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.25s;
+            width: 100%;
+            justify-content: center;
+            box-shadow: 0 5px 12px rgba(30, 111, 92, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+            box-shadow: 0 12px 22px rgba(30, 111, 92, 0.4);
+        }
+
+        .form-feedback {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0f2a2a;
+            color: #cbd5e1;
+            margin-top: 4rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* animations */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* responsive */
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+            .navbar {
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                justify-content: center;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .page-header h1 {
+                font-size: 2.3rem;
+            }
+        }
+
+        /* floating subtle icon animation */
+        .contact-info i, .whatsapp-btn i {
+            transition: transform 0.2s;
+        }
+
+        .contact-info h3:hover i {
+            transform: scale(1.08);
+        }
+
+        /* custom map marker style */
+        .office-map-mock {
+            margin-top: 1rem;
+            background: #eef5f2;
+            border-radius: 1.2rem;
+            padding: 0.8rem;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1e6f5c;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-hard-hat"></i>
+        <span>InfraTech</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="why.html">Why InfraTech</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="dashboard.html" class="btn-dashboard">Dashboard</a></li>
+    </ul>
+    <div class="live-clock" id="liveClock"></div>
+</nav>
+
+<main class="page-container">
+    <section class="page-header" data-aos="fade-up" data-aos-duration="700">
+        <h1>Let's build the future <i class="fas fa-arrow-trend-up"></i></h1>
+        <p>Connect with our infrastructure experts — we respond within 24 hours.</p>
+    </section>
+
+    <div class="contact-grid">
+        <!-- LEFT: Professional contact info + WhatsApp direct -->
+        <div class="contact-info" data-aos="fade-right" data-aos-delay="150">
+            <h3><i class="fas fa-map-marker-alt"></i> Main Office</h3>
+            <p>Gat No 1419 Shivshankar, Housing Society, Chikhali, Pune, Haveli,<br>Maharashtra, India, 411062</p>
+            <div class="office-map-mock">
+                <i class="fas fa-location-dot"></i> <span>📍 Fully equipped project HQ | Smart infrastructure hub</span>
+            </div>
+            
+            <h3><i class="fas fa-envelope"></i> Email</h3>
+            <p>suryainfratechsolutions@gmail.com</p>
+            
+            <h3><i class="fas fa-phone-alt"></i> Phone</h3>
+            <p>+9607697644</p>
+            
+            <hr>
+            <!-- WhatsApp direct integration -->
+            <div class="whatsapp-direct">
+                <a href="https://wa.me/9607697644?text=Hello%20InfraTech%2C%20I%27m%20interested%20in%20your%20infrastructure%20services%20and%20would%20like%20to%20discuss%20a%20project." 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+                <p style="font-size: 0.75rem; margin-top: 12px; color:#2c5a4a;"><i class="fas fa-clock"></i> Instant replies, 9AM–8PM IST</p>
+            </div>
+        </div>
+
+        <!-- RIGHT: Dynamic form with animation and toast feedback -->
+        <form id="contactForm" class="contact-form" data-aos="fade-left" data-aos-delay="200">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem;">
+                <i class="fas fa-pen-fancy" style="color:#1e6f5c; font-size: 1.6rem;"></i>
+                <h3 style="color: #1a4e48; margin:0;">Send us a message</h3>
+            </div>
+            <input type="text" id="name" placeholder="Full name *" required>
+            <input type="email" id="email" placeholder="Email address *" required>
+            <input type="text" id="subject" placeholder="Subject (e.g., Tender, Collaboration)">
+            <textarea id="message" rows="5" placeholder="Tell us about your project, goals or inquiry..." required></textarea>
+            <button type="submit" class="cta-button" id="submitBtn">
+                <span>Send Message</span> <i class="fas fa-paper-plane"></i>
+            </button>
+            <div id="formFeedback" class="form-feedback"></div>
+            <p style="font-size: 0.7rem; text-align: center; margin-top: 1rem; color: #6c8b9b;"><i class="fas fa-shield-alt"></i> Your data is secure — we’ll never share your info.</p>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 SunikshaByte Technologies | Smart Intelligence — Building resilient tomorrows</p>
+</footer>
+
+<!-- AOS + GSAP for extra micro interactions (optional but adds pro animations) -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script>
+    // Live Clock update (professional)
+    function updateClock() {
+        const now = new Date();
+        const options = { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        let timeStr = now.toLocaleTimeString('en-IN', options);
+        const day = now.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+        document.getElementById('liveClock').innerHTML = `<i class="far fa-clock"></i> ${day} | ${timeStr}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // AOS init (scroll animations)
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 80,
+        easing: 'ease-out-quad',
+    });
+
+    // GSAP entrance animation for contact grid and minor floating effect
+    gsap.fromTo(".contact-info", 
+        { opacity: 0, x: -35 },
+        { opacity: 1, x: 0, duration: 0.8, ease: "power2.out", delay: 0.2 }
+    );
+    gsap.fromTo(".contact-form", 
+        { opacity: 0, x: 35 },
+        { opacity: 1, x: 0, duration: 0.8, ease: "power2.out", delay: 0.3 }
+    );
+    
+    // subtle pulse for WhatsApp button on hover (already via css, extra fun)
+    const waBtn = document.querySelector('.whatsapp-btn');
+    if(waBtn) {
+        waBtn.addEventListener('mouseenter', () => {
+            gsap.to(waBtn, { scale: 1.02, duration: 0.2, ease: "backOut" });
+        });
+        waBtn.addEventListener('mouseleave', () => {
+            gsap.to(waBtn, { scale: 1, duration: 0.2 });
+        });
+    }
+
+    // Form handling with validation, feedback animation and simulated submit (beautiful toast style)
+    const contactForm = document.getElementById('contactForm');
+    const feedbackDiv = document.getElementById('formFeedback');
+    const submitBtn = document.getElementById('submitBtn');
+
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // gather fields
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim() || "New inquiry from InfraTech contact";
+        const message = document.getElementById('message').value.trim();
+        
+        // validation
+        if(!name || !email || !message) {
+            feedbackDiv.innerHTML = '<span style="color:#c0392b; background:#ffe6e5; padding: 8px 16px; border-radius: 60px;"><i class="fas fa-exclamation-triangle"></i> Please fill all required fields (*)</span>';
+            gsap.fromTo(feedbackDiv, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3 });
+            setTimeout(() => {
+                if(feedbackDiv.innerHTML.includes('fill all required')) {
+                    gsap.to(feedbackDiv, { opacity: 0, duration: 0.8, delay: 2.5, onComplete: () => feedbackDiv.innerHTML = '' });
+                }
+            }, 2800);
+            return;
+        }
+        
+        const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+        if(!emailPattern.test(email)) {
+            feedbackDiv.innerHTML = '<span style="color:#c0392b; background:#ffe6e5; padding: 8px 16px; border-radius: 60px;"><i class="fas fa-envelope-open-text"></i> Enter a valid email address.</span>';
+            gsap.fromTo(feedbackDiv, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.25 });
+            setTimeout(() => {
+                if(feedbackDiv.innerHTML.includes('valid email')) gsap.to(feedbackDiv, { opacity: 0, duration: 0.6, delay: 2, onComplete: () => feedbackDiv.innerHTML = '' });
+            }, 2500);
+            return;
+        }
+        
+        // Show loading state on button
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate API / backend integration (just for demo with animation & success)
+        // In real case you would fetch POST to your endpoint. Here we mimic success with delay.
+        setTimeout(() => {
+            // Show success message with professional touch
+            feedbackDiv.innerHTML = `<span style="background:#e0f2e9; color:#1e6f5c; padding: 12px 20px; border-radius: 50px; display:inline-block; font-weight:600;"><i class="fas fa-check-circle"></i> Thanks ${name}! Our team will reach out shortly.</span>`;
+            gsap.fromTo(feedbackDiv, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "backOut" });
+            
+            // Reset form fields
+            contactForm.reset();
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+            
+            // Auto clear feedback after 6 seconds
+            setTimeout(() => {
+                gsap.to(feedbackDiv, { opacity: 0, duration: 0.6, onComplete: () => feedbackDiv.innerHTML = '' });
+            }, 5500);
+            
+            // Optional: you can also send real data to a webhook (dummy commented)
+            // Example: fetch('/api/contact', { method: 'POST', body: JSON.stringify({name, email, subject, message}) })
+        }, 1200);
+    });
+    
+    // Additional subtle floating effect for header icons
+    const headerIcon = document.querySelector('.page-header i');
+    if(headerIcon) {
+        gsap.to(headerIcon, { y: -4, repeat: -1, yoyo: true, duration: 1.2, ease: "sine.inOut" });
+    }
+    
+    // animate border glow on form inputs on focus modern
+    const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            gsap.to(input, { scale: 1.01, duration: 0.2, borderColor: "#1e6f5c", ease: "power1.out" });
+        });
+        input.addEventListener('blur', () => {
+            gsap.to(input, { scale: 1, borderColor: "#e2e8f0", duration: 0.2 });
+        });
+    });
+    
+    // Prefill WhatsApp link dynamic based on message? Not necessary, but it's already clean.
+    // Extra: If someone clicks on phone number or email copy with toast? optional micro-interaction
+    const phoneP = document.querySelector('.contact-info p:nth-of-type(3)');
+    if(phoneP) {
+        phoneP.style.cursor = 'pointer';
+        phoneP.addEventListener('click', () => {
+            navigator.clipboard.writeText('+9607697644');
+            const tempToast = document.createElement('div');
+            tempToast.innerText = '📞 Phone copied!';
+            tempToast.style.position = 'fixed';
+            tempToast.style.bottom = '20px';
+            tempToast.style.left = '50%';
+            tempToast.style.transform = 'translateX(-50%)';
+            tempToast.style.background = '#1e2a3e';
+            tempToast.style.color = '#fff';
+            tempToast.style.padding = '8px 20px';
+            tempToast.style.borderRadius = '40px';
+            tempToast.style.fontSize = '0.8rem';
+            tempToast.style.zIndex = '9999';
+            tempToast.style.backdropFilter = 'blur(8px)';
+            document.body.appendChild(tempToast);
+            setTimeout(() => tempToast.remove(), 1800);
+        });
+    }
+    
+    // email copy trigger
+    const emailP = document.querySelector('.contact-info p:nth-of-type(2)');
+    if(emailP) {
+        emailP.style.cursor = 'pointer';
+        emailP.addEventListener('click', () => {
+            navigator.clipboard.writeText('suryainfratechsolutions@gmail.com');
+            const toastMsg = document.createElement('div');
+            toastMsg.innerText = '✉️ Email copied to clipboard';
+            toastMsg.style.cssText = 'position:fixed; bottom:25px; left:50%; transform:translateX(-50%); background:#1e6f5c; color:white; padding:8px 20px; border-radius:60px; font-size:0.8rem; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.2);';
+            document.body.appendChild(toastMsg);
+            setTimeout(() => toastMsg.remove(), 1800);
+        });
+    }
+</script>
+</body>
+</html>
