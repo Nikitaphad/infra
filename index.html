@@ -92,51 +92,41 @@ nav a:hover {
     height: 100%;
     z-index: 0;
     overflow: hidden;
+    background-color: #0A3D62; /* fallback color always visible */
 }
 
 /* wrapper for horizontal scrolling images */
 .slider-track {
     display: flex;
-    width: calc(100% * 8); /* enough width to hold all images + duplication */
     height: 100%;
-    animation: scrollImages 28s linear infinite;
     will-change: transform;
 }
 
 /* each slide item */
 .slide {
-    flex: 0 0 100vw;
+    flex-shrink: 0;
+    width: 100vw;
     height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    background-color: #0A3D62;
 }
 
-/* smooth infinite keyframes for seamless panning/scrolling effect */
+/* smooth infinite keyframes for seamless scrolling effect */
 @keyframes scrollImages {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-/* Optional: pause on hover for better UX (can be removed) */
-.hero:hover .slider-track {
-    animation-play-state: running;
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 /* Dark overlay to ensure text readability */
 .hero::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(10,61,98,0.82) 0%, rgba(10,61,98,0.75) 100%);
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(10,61,98,0.80) 0%, rgba(10,61,98,0.75) 100%);
     z-index: 1;
     pointer-events: none;
 }
@@ -149,7 +139,6 @@ nav a:hover {
     margin: 0 auto;
     color: white;
     text-shadow: 0 2px 12px rgba(0,0,0,0.3);
-    backdrop-filter: brightness(1.02);
 }
 
 .hero h1 {
@@ -260,10 +249,7 @@ h2 {
     margin-top: 20px;
 }
 
-.cta h2 {
-    color: white;
-    margin-bottom: 20px;
-}
+.cta h2 { color: white; margin-bottom: 20px; }
 
 .cta a {
     background: #ffffff;
@@ -305,12 +291,9 @@ section.show {
     transform: translateY(0);
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media(max-width:768px){
-
-    .menu-toggle {
-        display: block;
-    }
+    .menu-toggle { display: block; }
 
     nav {
         display: none;
@@ -319,8 +302,7 @@ section.show {
         width: 100%;
         text-align: center;
         position: absolute;
-        top: 70px;
-        left: 0;
+        top: 70px; left: 0;
         padding: 18px 0;
         gap: 18px;
         border-radius: 0 0 16px 16px;
@@ -328,41 +310,23 @@ section.show {
         z-index: 999;
     }
 
-    nav.active {
-        display: flex;
-    }
-
-    header {
-        flex-wrap: wrap;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .hero p {
-        font-size: 1rem;
-    }
-    
-    .gallery img {
-        height: 180px;
-    }
-    
-    .card {
-        padding: 24px 16px;
-    }
+    nav.active { display: flex; }
+    header { flex-wrap: wrap; }
+    .hero h1 { font-size: 2rem; }
+    .hero p  { font-size: 1rem; }
+    .gallery img { height: 180px; }
+    .card { padding: 24px 16px; }
 }
 
-/* Additional small polish */
 .hero .trust-badge {
     margin-top: 25px;
     font-weight: 500;
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.15);
     display: inline-block;
-    padding: 6px 18px;
+    padding: 8px 20px;
     border-radius: 40px;
     font-size: 0.9rem;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
 }
 
 </style>
@@ -382,15 +346,10 @@ section.show {
     </nav>
 </header>
 
-<!-- HERO with scrolling background images (carousel sliding effect) -->
+<!-- HERO with scrolling background images -->
 <section class="hero">
-    <!-- Background slider (infinite scrolling images) -->
     <div class="hero-slider">
-        <div class="slider-track" id="sliderTrack">
-            <!-- Images will be dynamically injected by JS to avoid repetition issues,
-                 but we also provide inline fallback via CSS background images on slides.
-                 This ensures images scroll horizontally and blend seamlessly -->
-        </div>
+        <div class="slider-track" id="sliderTrack"></div>
     </div>
     <div>
         <h1>Surya Infratech Solutions Pvt. Ltd.</h1>
@@ -405,8 +364,9 @@ section.show {
     <div class="card">
         <h2>Who We Are</h2>
         <p style="line-height:1.6; font-size:1.05rem;">
-        We are a trusted construction and infrastructure company delivering high-quality residential and commercial solutions.
-        Backed by Surya Business Group (since 1998), we bring experience, innovation, and reliability.
+            We are a trusted construction and infrastructure company delivering high-quality residential
+            and commercial solutions. Backed by Surya Business Group (since 1998), we bring experience,
+            innovation, and reliability.
         </p>
         <p style="margin-top:16px; color:#2c5282;">🏡 Excellence in every brick, glass, and beam.</p>
     </div>
@@ -432,10 +392,10 @@ section.show {
     <div class="card">
         <h2>Our Projects</h2>
         <div class="gallery">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%2334495e'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EModern Facade%3C/text%3E%3C/svg%3E" alt="Modern facade">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231e4a6e'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EAluminium Work%3C/text%3E%3C/svg%3E" alt="Aluminium work">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a5f7a'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EUPVC Windows%3C/text%3E%3C/svg%3E" alt="UPVC Windows">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%233d6e8c'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EGlass & Railing%3C/text%3E%3C/svg%3E" alt="Glass railings">
+            <img src="images/image1.jpg" alt="Modern Facade" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%2334495e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EModern Facade%3C/text%3E%3C/svg%3E'">
+            <img src="images/image2.jpg" alt="Aluminium Work" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%231e4a6e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EAluminium Work%3C/text%3E%3C/svg%3E'">
+            <img src="images/image3.jpg" alt="UPVC Windows" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%232a5f7a%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EUPVC Windows%3C/text%3E%3C/svg%3E'">
+            <img src="images/image4.jpg" alt="Glass & Railing" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%233d6e8c%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EGlass %26 Railing%3C/text%3E%3C/svg%3E'">
         </div>
         <p style="margin-top:20px; font-style:italic;">✨ Real project imagery available upon request</p>
     </div>
@@ -453,135 +413,111 @@ section.show {
 
 <script>
 // =======================================================
-// 1. Mobile menu toggle
-// 2. Scroll reveal animation
-// 3. SCROLLING IMAGES BACKGROUND (infinite horizontal carousel)
-//    - High-quality construction-related images (remote placeholders but real style)
-//    - We'll use unsplash-like placeholder images that look like construction/infrastructure 
-//      to match theme. Keep smooth infinite scroll without any layout shift.
-//    - This solution does NOT disturb existing text or structure. 
+// ✅ LOCAL IMAGES CONFIGURATION
+// Add your image filenames here.
+// All images must be inside the "images" folder
+// next to this index.html file.
+// Example folder structure:
+//   index.html
+//   images/
+//     image1.jpg
+//     image2.jpg
+//     image3.jpg   (add more as needed)
 // =======================================================
+const imageSet = [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg",
+    // ➕ Add more images below if you have them:
+    // "images/image3.jpg",
+    // "images/image4.jpg",
+    // "images/image5.jpg",
+];
 
-// ----- Mobile Menu Toggle -----
+// =======================================================
+// Mobile Menu Toggle
+// =======================================================
 const menuBtn = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector("nav");
-if(menuBtn && navMenu) {
+if (menuBtn && navMenu) {
     menuBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         navMenu.classList.toggle("active");
     });
-    // Optional: close menu when clicking a link (improves mobile UX)
     document.querySelectorAll("nav a").forEach(link => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click", () => navMenu.classList.remove("active"));
+    });
+    document.addEventListener("click", function (e) {
+        if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) {
             navMenu.classList.remove("active");
-        });
+        }
     });
 }
 
-// ----- Scroll Reveal Animation (existing but fixed typo) -----
+// =======================================================
+// Scroll Reveal Animation
+// =======================================================
 window.addEventListener("scroll", () => {
     document.querySelectorAll("section:not(.hero)").forEach(sec => {
         const rect = sec.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        if(rect.top < windowHeight - 80) {
+        if (rect.top < (window.innerHeight || document.documentElement.clientHeight) - 80) {
             sec.classList.add("show");
         }
     });
 });
-// trigger once to reveal visible sections on load
 window.dispatchEvent(new Event("scroll"));
 
-// ----- HERO BACKGROUND: SCROLLING IMAGES (dynamic, seamless, infinite) -----
-// We'll use a set of high-quality construction, infrastructure & modern building images.
-// Images are from reliable CDN with consistent dimensions, and we will clone them to achieve infinite scroll.
-// The slider-track contains multiple slides (each 100vw width) that scroll horizontally.
-// Using real images: construction, aluminium, glass facades, upvc, etc.
-
-const imageSet = [
-    "https://picsum.photos/id/104/1600/900",      // beautiful dam / construction
-    "https://picsum.photos/id/15/1600/900",       // industrial architecture
-    "https://picsum.photos/id/20/1600/900",       // modern building
-    "https://picsum.photos/id/96/1600/900",       // glass facade
-    "https://picsum.photos/id/13/1600/900",       // modern architecture bridge
-    "https://picsum.photos/id/39/1600/900",       // glass building
-    "https://picsum.photos/id/250/1600/900",      // city construction
-    "https://picsum.photos/id/43/1600/900"        // urban architecture
-];
-
-// For variety and to avoid repetition in a smooth loop, we also double them for seamless effect
-// The slider-track will contain two sets of the same images (or multiple copies) so that when it
-// shifts 50% width, it appears infinite without glitch.
-
+// =======================================================
+// HERO BACKGROUND: SCROLLING LOCAL IMAGES
+// =======================================================
 const sliderTrack = document.getElementById("sliderTrack");
-if(sliderTrack) {
-    // Clear any existing content if needed
-    sliderTrack.innerHTML = "";
-    // Number of unique images
-    const images = [...imageSet];
-    // Duplicate images to create infinite seamless loop (at least 2 cycles)
-    // For smooth horizontal scrolling, we append 2 full copies of image array.
-    // Because track width = total slides * 100vw, and animation translates by -50% of total width.
-    const allSlides = [...images, ...images];  // 16 slides with real images
-    
-    allSlides.forEach((imgUrl, idx) => {
-        const slideDiv = document.createElement("div");
-        slideDiv.className = "slide";
-        // Apply background image
-        slideDiv.style.backgroundImage = `url('${imgUrl}')`;
-        slideDiv.style.backgroundSize = "cover";
-        slideDiv.style.backgroundPosition = "center 30%";
-        slideDiv.style.backgroundRepeat = "no-repeat";
-        // Add a subtle dark inner overlay to keep text readable? Already hero::before handles overlay.
-        sliderTrack.appendChild(slideDiv);
+
+if (sliderTrack && imageSet.length > 0) {
+
+    // Duplicate the set so the animation loops seamlessly
+    const allSlides = [...imageSet, ...imageSet];
+
+    // Total width = number of slides × 100vw
+    sliderTrack.style.width = `${allSlides.length * 100}vw`;
+
+    // Build slides
+    allSlides.forEach((imgPath) => {
+        const slide = document.createElement("div");
+        slide.className = "slide";
+
+        // ✅ KEY FIX: Set background-image directly using CSS
+        // This is the most reliable way to load local images
+        slide.style.cssText = `
+            flex-shrink: 0;
+            width: 100vw;
+            height: 100%;
+            background-image: url('${imgPath}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #0A3D62;
+        `;
+
+        sliderTrack.appendChild(slide);
     });
-    
-    // After populating slides, ensure smooth infinite animation.
-    // total width = slides count * 100vw. We'll keep animation duration based on quality.
-    // Adjust duration for pleasant speed. 28s for moderate scroll.
-    // Additionally, we pause animation on window resize? not needed, but ensure animation restarts if needed.
-    // Already defined in CSS, but we may reset animation to avoid any stutter.
-    // Also, we need to ensure that when user hovers, animation runs smoothly (default running)
-    // Duplicate again? the animation scrolls from 0 to -50% of track width. Since track width = (N_slides * 100vw),
-    // and we have 2 copies of original images, total slides = 16, so 50% of track = 8 slides, which lands exactly on duplicate set.
-    // This provides infinite seamless feel.
-    
-    // For performance, we can lazy load but all good.
-    // Fallback: if images fail to load, the background color remains dark overlay.
-    
-    // Optional: add preload effect for hero overlay.
-    // Additionally, we can apply a very slight transition on load.
+
+    // Set animation duration (longer = slower scroll)
+    const duration = Math.max(30, allSlides.length * 4);
+    sliderTrack.style.animation = `scrollImages ${duration}s linear infinite`;
+
+    console.log(`✅ Slider ready — ${imageSet.length} image(s) loaded from "images/" folder`);
+    console.log(`   Slides: ${allSlides.length} | Duration: ${duration}s`);
+
+} else {
+    console.warn("⚠️ No images found. Make sure images/ folder exists with image1.jpg, image2.jpg etc.");
 }
 
-// Also, for robustness, if any network latency, we keep solid fallback background color beneath slider.
-// The hero section background before images loads: we set hero-slider background fallback to #0a3d62.
-document.querySelector('.hero-slider')?.style.setProperty('background', '#0a3d62', 'important');
+// Trigger scroll check after slight delay
+setTimeout(() => window.dispatchEvent(new Event("scroll")), 150);
 
-// Enhance: Make sure text stays above and background slider never interferes
-// Because we set z-index properly.
-
-// Additional polish: ensure that images that are too bright don't hamper text -> already overlay gradient.
-// Also make slider responsive on resize: no extra steps needed.
-
-// ======== PREVENT ANY EXISTING ERRORS =========
-// Fix missing images in gallery: we replaced with nice svg placeholder but still professional.
-// Also fix typo in existing script (had "a thdd") but we rewrote scroll reveal correctly.
-// For original code: they had sec.classList.a thdd which we removed. Now our scroll reveal works.
-
-// Also add small validation for menu-toggle for touch devices.
-if(menuBtn) {
-    document.addEventListener('click', function(event) {
-        const isClickInsideNav = navMenu?.contains(event.target);
-        const isClickOnMenu = menuBtn.contains(event.target);
-        if (!isClickInsideNav && !isClickOnMenu && navMenu?.classList.contains('active')) {
-            navMenu.classList.remove('active');
-        }
-    });
-}
-
-// Ensure all sections initially check if visible on load
-setTimeout(() => {
-    window.dispatchEvent(new Event("scroll"));
-}, 100);
+console.log("🏗️ SURYA INFRATECH - Website Loaded");
+console.log("📁 Image folder expected at: images/image1.jpg, images/image2.jpg");
 </script>
 
 </body>
