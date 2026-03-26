@@ -7,14 +7,8 @@
 
 <style>
 
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* BODY */
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: #ffffff;
@@ -36,31 +30,12 @@ header {
     box-shadow: 0 2px 12px rgba(0,0,0,0.1);
 }
 
-.logo {
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
+.logo { font-size: 20px; font-weight: bold; letter-spacing: 1px; }
 
-/* NAV */
-nav {
-    display: flex;
-    gap: 20px;
-}
+nav { display: flex; gap: 20px; }
+nav a { color: white; text-decoration: none; font-weight: 500; transition: 0.2s; }
+nav a:hover { color: #aad4ff; }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: 0.2s;
-}
-
-nav a:hover {
-    color: #aad4ff;
-    transform: translateY(-1px);
-}
-
-/* MOBILE MENU */
 .menu-toggle {
     display: none;
     font-size: 26px;
@@ -70,7 +45,9 @@ nav a:hover {
     cursor: pointer;
 }
 
-/* ========== HERO SECTION WITH SCROLLING IMAGE BACKGROUND ========== */
+/* =============================================
+   HERO SECTION
+   ============================================= */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -80,59 +57,37 @@ nav a:hover {
     text-align: center;
     padding: 40px 20px;
     overflow: hidden;
-    isolation: isolate;
 }
 
-/* Background image slider container */
-.hero-slider {
+/* SLIDESHOW CONTAINER */
+.hero-slideshow {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: 0;
-    overflow: hidden;
-    background-color: #0A3D62; /* fallback color always visible */
-}
-
-/* wrapper for horizontal scrolling images */
-.slider-track {
-    display: flex;
-    height: 100%;
-    will-change: transform;
-}
-
-/* each slide item */
-.slide {
-    flex-shrink: 0;
-    width: 100vw;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
     background-color: #0A3D62;
 }
 
-/* smooth infinite keyframes for seamless scrolling effect */
-@keyframes scrollImages {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-/* Dark overlay to ensure text readability */
-.hero::before {
-    content: "";
+/* Each slide sits stacked and fades in/out */
+.hero-slideshow .slide {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, rgba(10,61,98,0.80) 0%, rgba(10,61,98,0.75) 100%);
-    z-index: 1;
-    pointer-events: none;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #0A3D62;
+    opacity: 0;
 }
 
-/* Hero text content stays above background */
-.hero > div {
+/* DARK OVERLAY */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,61,98,0.82) 0%, rgba(10,61,98,0.75) 100%);
+    z-index: 1;
+}
+
+/* HERO TEXT */
+.hero-content {
     position: relative;
     z-index: 2;
     max-width: 900px;
@@ -141,23 +96,56 @@ nav a:hover {
     text-shadow: 0 2px 12px rgba(0,0,0,0.3);
 }
 
-.hero h1 {
+.hero-content h1 {
     font-size: clamp(32px, 6vw, 56px);
     font-weight: 700;
     margin-bottom: 12px;
     letter-spacing: -0.5px;
 }
 
-.hero p {
+.hero-content p {
     font-size: clamp(16px, 2.5vw, 22px);
     margin-top: 12px;
     font-weight: 500;
     opacity: 0.95;
 }
 
-.hero p:first-of-type {
-    font-size: 1.3rem;
-    letter-spacing: 1px;
+.hero-content p:first-of-type { font-size: 1.3rem; letter-spacing: 1px; }
+
+.trust-badge {
+    margin-top: 25px;
+    font-weight: 500;
+    background: rgba(255,255,255,0.15);
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(4px);
+}
+
+/* SLIDE DOTS */
+.slide-dots {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+}
+
+.slide-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    display: block;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.slide-dots span.active {
+    background: rgba(255,255,255,1);
+    transform: scale(1.3);
 }
 
 /* SECTIONS */
@@ -166,12 +154,8 @@ section:not(.hero):not(.cta) {
     text-align: center;
 }
 
-/* LIGHT SECTION */
-.light {
-    background: #f0f6ff;
-}
+.light { background: #f0f6ff; }
 
-/* CARD */
 .card {
     background: white;
     padding: 30px;
@@ -179,15 +163,12 @@ section:not(.hero):not(.cta) {
     max-width: 1200px;
     margin: 0 auto;
     box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease;
 }
 
-/* HEADINGS */
 h2 {
     color: #0A3D62;
     margin-bottom: 20px;
     font-size: 2rem;
-    position: relative;
     display: inline-block;
 }
 
@@ -208,7 +189,6 @@ h2 {
     font-weight: 600;
     font-size: 1.1rem;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
 }
 
 .services li:hover {
@@ -245,7 +225,6 @@ h2 {
     color: white;
     text-align: center;
     padding: 70px 20px;
-    border-radius: 0px;
     margin-top: 20px;
 }
 
@@ -261,16 +240,10 @@ h2 {
     font-size: 1.1rem;
     display: inline-block;
     transition: 0.25s;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.cta a:hover {
-    background: #FFD966;
-    color: #0A3D62;
-    transform: scale(1.02);
-}
+.cta a:hover { background: #FFD966; transform: scale(1.02); }
 
-/* FOOTER */
 footer {
     background: #0A3D62;
     color: white;
@@ -279,20 +252,17 @@ footer {
     font-size: 0.9rem;
 }
 
-/* SCROLL REVEAL ANIMATION */
+/* SCROLL REVEAL */
 section:not(.hero) {
     opacity: 0;
     transform: translateY(35px);
-    transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-section.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+section.show { opacity: 1; transform: translateY(0); }
 
-/* Responsive */
-@media(max-width:768px){
+/* RESPONSIVE */
+@media(max-width: 768px) {
     .menu-toggle { display: block; }
 
     nav {
@@ -312,21 +282,10 @@ section.show {
 
     nav.active { display: flex; }
     header { flex-wrap: wrap; }
-    .hero h1 { font-size: 2rem; }
-    .hero p  { font-size: 1rem; }
+    .hero-content h1 { font-size: 2rem; }
+    .hero-content p  { font-size: 1rem; }
     .gallery img { height: 180px; }
     .card { padding: 24px 16px; }
-}
-
-.hero .trust-badge {
-    margin-top: 25px;
-    font-weight: 500;
-    background: rgba(255,255,255,0.15);
-    display: inline-block;
-    padding: 8px 20px;
-    border-radius: 40px;
-    font-size: 0.9rem;
-    backdrop-filter: blur(4px);
 }
 
 </style>
@@ -346,17 +305,38 @@ section.show {
     </nav>
 </header>
 
-<!-- HERO with scrolling background images -->
+<!-- HERO SECTION -->
 <section class="hero">
-    <div class="hero-slider">
-        <div class="slider-track" id="sliderTrack"></div>
+
+    <!-- ✅ SLIDESHOW BACKGROUND
+         Put your images in the "images/" folder.
+         Add or remove <div class="slide"> lines as needed.
+         The JS below will auto-handle timing for any number of slides.
+    -->
+    <div class="hero-slideshow" id="heroSlideshow">
+        <div class="slide" style="background-image: url('images/image1.jpg');"></div>
+        <div class="slide" style="background-image: url('images/image2.jpg');"></div>
+        <div class="slide" style="background-image: url('images/image3.jpg');"></div>
+        <div class="slide" style="background-image: url('images/image4.jpg');"></div>
+        <!-- Add more slides here:
+        <div class="slide" style="background-image: url('images/image5.jpg');"></div>
+        -->
     </div>
-    <div>
+
+    <!-- DARK OVERLAY -->
+    <div class="hero-overlay"></div>
+
+    <!-- HERO TEXT — unchanged -->
+    <div class="hero-content">
         <h1>Surya Infratech Solutions Pvt. Ltd.</h1>
         <p>Trust | Strength | Innovation</p>
         <p>Modern, Durable & Cost-Effective Construction Solutions</p>
         <div class="trust-badge">🏆 25+ Years Legacy • 500+ Projects</div>
     </div>
+
+    <!-- SLIDE INDICATOR DOTS (auto-generated by JS) -->
+    <div class="slide-dots" id="slideDots"></div>
+
 </section>
 
 <!-- ABOUT -->
@@ -392,10 +372,14 @@ section.show {
     <div class="card">
         <h2>Our Projects</h2>
         <div class="gallery">
-            <img src="images/image1.jpg" alt="Modern Facade" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%2334495e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EModern Facade%3C/text%3E%3C/svg%3E'">
-            <img src="images/image2.jpg" alt="Aluminium Work" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%231e4a6e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EAluminium Work%3C/text%3E%3C/svg%3E'">
-            <img src="images/image3.jpg" alt="UPVC Windows" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%232a5f7a%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EUPVC Windows%3C/text%3E%3C/svg%3E'">
-            <img src="images/image4.jpg" alt="Glass & Railing" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%233d6e8c%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EGlass %26 Railing%3C/text%3E%3C/svg%3E'">
+            <img src="images/image1.jpg" alt="Modern Facade"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%2334495e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EModern Facade%3C/text%3E%3C/svg%3E'">
+            <img src="images/image2.jpg" alt="Aluminium Work"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%231e4a6e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EAluminium Work%3C/text%3E%3C/svg%3E'">
+            <img src="images/image3.jpg" alt="UPVC Windows"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%232a5f7a%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EUPVC Windows%3C/text%3E%3C/svg%3E'">
+            <img src="images/image4.jpg" alt="Glass &amp; Railing"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%233d6e8c%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EGlass %26 Railing%3C/text%3E%3C/svg%3E'">
         </div>
         <p style="margin-top:20px; font-style:italic;">✨ Real project imagery available upon request</p>
     </div>
@@ -412,32 +396,7 @@ section.show {
 </footer>
 
 <script>
-// =======================================================
-// ✅ LOCAL IMAGES CONFIGURATION
-// Add your image filenames here.
-// All images must be inside the "images" folder
-// next to this index.html file.
-// Example folder structure:
-//   index.html
-//   images/
-//     image1.jpg
-//     image2.jpg
-//     image3.jpg   (add more as needed)
-// =======================================================
-const imageSet = [
-    "images/image1.jpg",
-    "images/image2.jpg",
-    "images/image3.jpg",
-    "images/image4.jpg",
-    // ➕ Add more images below if you have them:
-    // "images/image3.jpg",
-    // "images/image4.jpg",
-    // "images/image5.jpg",
-];
-
-// =======================================================
-// Mobile Menu Toggle
-// =======================================================
+// ── Mobile Menu ──
 const menuBtn = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector("nav");
 if (menuBtn && navMenu) {
@@ -445,79 +404,71 @@ if (menuBtn && navMenu) {
         e.stopPropagation();
         navMenu.classList.toggle("active");
     });
-    document.querySelectorAll("nav a").forEach(link => {
-        link.addEventListener("click", () => navMenu.classList.remove("active"));
-    });
-    document.addEventListener("click", function (e) {
-        if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-            navMenu.classList.remove("active");
-        }
+    document.querySelectorAll("nav a").forEach(l => l.addEventListener("click", () => navMenu.classList.remove("active")));
+    document.addEventListener("click", (e) => {
+        if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) navMenu.classList.remove("active");
     });
 }
 
-// =======================================================
-// Scroll Reveal Animation
-// =======================================================
-window.addEventListener("scroll", () => {
+// ── Scroll Reveal ──
+const revealSections = () => {
     document.querySelectorAll("section:not(.hero)").forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top < (window.innerHeight || document.documentElement.clientHeight) - 80) {
+        if (sec.getBoundingClientRect().top < (window.innerHeight || document.documentElement.clientHeight) - 80) {
             sec.classList.add("show");
         }
     });
-});
-window.dispatchEvent(new Event("scroll"));
+};
+window.addEventListener("scroll", revealSections);
+setTimeout(revealSections, 150);
 
-// =======================================================
-// HERO BACKGROUND: SCROLLING LOCAL IMAGES
-// =======================================================
-const sliderTrack = document.getElementById("sliderTrack");
+// ── Hero Slideshow ──
+(function () {
+    const slides    = Array.from(document.querySelectorAll(".hero-slideshow .slide"));
+    const dotsWrap  = document.getElementById("slideDots");
+    const count     = slides.length;
+    if (!count) return;
 
-if (sliderTrack && imageSet.length > 0) {
+    const INTERVAL  = 5000;  // ms each slide stays visible (change to taste)
+    const FADE      = 1000;  // ms fade transition
 
-    // Duplicate the set so the animation loops seamlessly
-    const allSlides = [...imageSet, ...imageSet];
-
-    // Total width = number of slides × 100vw
-    sliderTrack.style.width = `${allSlides.length * 100}vw`;
-
-    // Build slides
-    allSlides.forEach((imgPath) => {
-        const slide = document.createElement("div");
-        slide.className = "slide";
-
-        // ✅ KEY FIX: Set background-image directly using CSS
-        // This is the most reliable way to load local images
-        slide.style.cssText = `
-            flex-shrink: 0;
-            width: 100vw;
-            height: 100%;
-            background-image: url('${imgPath}');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: #0A3D62;
-        `;
-
-        sliderTrack.appendChild(slide);
+    // Build dots
+    const dots = slides.map(() => {
+        const d = document.createElement("span");
+        dotsWrap.appendChild(d);
+        return d;
     });
 
-    // Set animation duration (longer = slower scroll)
-    const duration = Math.max(30, allSlides.length * 4);
-    sliderTrack.style.animation = `scrollImages ${duration}s linear infinite`;
+    // Apply CSS transition to each slide
+    slides.forEach(s => {
+        s.style.transition = `opacity ${FADE}ms ease-in-out`;
+    });
 
-    console.log(`✅ Slider ready — ${imageSet.length} image(s) loaded from "images/" folder`);
-    console.log(`   Slides: ${allSlides.length} | Duration: ${duration}s`);
+    let current = 0;
 
-} else {
-    console.warn("⚠️ No images found. Make sure images/ folder exists with image1.jpg, image2.jpg etc.");
-}
+    function showSlide(idx) {
+        slides[current].style.opacity = "0";
+        dots[current].classList.remove("active");
+        current = idx;
+        slides[current].style.opacity = "1";
+        dots[current].classList.add("active");
+    }
 
-// Trigger scroll check after slight delay
-setTimeout(() => window.dispatchEvent(new Event("scroll")), 150);
+    // Show first slide immediately
+    showSlide(0);
 
-console.log("🏗️ SURYA INFRATECH - Website Loaded");
-console.log("📁 Image folder expected at: images/image1.jpg, images/image2.jpg");
+    // Auto-advance
+    setInterval(() => {
+        showSlide((current + 1) % count);
+    }, INTERVAL);
+
+    // Click dots to jump
+    dots.forEach((dot, i) => {
+        dot.style.cursor = "pointer";
+        dot.addEventListener("click", () => showSlide(i));
+    });
+
+    console.log(`✅ Slideshow ready — ${count} slides, ${INTERVAL / 1000}s interval`);
+})();
 </script>
 
 </body>
